@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
                         if (n % p == 0)
                         {
                                 q = n / p;
-                                printf("%lld = %lld*%lld\n", n, q, p);
+                                printf("%lld=%lld*%lld\n", n, q, p);
                                 break;
                         }
                 }
