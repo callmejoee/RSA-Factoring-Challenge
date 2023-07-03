@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -31,24 +30,10 @@ int main(int argc, char *argv[]) {
     }
     char line[100];
     while (fgets(line, sizeof(line), file) != NULL) {
-        unsigned long long num = strtoull(line, NULL, 10);
-        if (num <= ULLONG_MAX) {
-            // use simple algorithm for small numbers
-            unsigned long long p;
-            for (p = 2; p <= num; p++) {
-                if (num % p == 0) {
-                    unsigned long long q = num / p;
-                    printf("%llu=%llu*%llu\n", num, q, p);
-                    break;
-                }
-            }
-        } else {
-            // use GMP library for large numbers
-            mpz_t num_gmp;
-            mpz_init_set_str(num_gmp, line, 10);
-            factorize(num_gmp);
-            mpz_clear(num_gmp);
-        }
+        mpz_t num;
+        mpz_init_set_str(num, line, 10);
+        factorize(num);
+        mpz_clear(num);
     }
     fclose(file);
     return 0;
